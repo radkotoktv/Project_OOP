@@ -91,11 +91,14 @@ std::istream& operator >> (std::istream& in, Book& other) {
     return in;
 }
 std::ostream& operator << (std::ostream& out, const Book& other) {
-    std::cout << "Author: " << other.author << std::endl;
-    std::cout << "Title: " << other.title << std::endl;
-    std::cout << "Text: " << other.text << std::endl;
-    std::cout << "Description: " << other.description << std::endl;
-    std::cout << "Rating: " << other.rating << "/10" << std::endl;
-    std::cout << "ISBN: " << other.ISBN << std::endl;
+    std::ofstream importantFile("importantInfo.txt", std::ios::app);
+    importantFile << other.author << std::endl;
+    importantFile << other.title << std::endl;
+    importantFile << other.text << std::endl;
+    importantFile << other.description << std::endl;
+    importantFile << other.rating << std::endl;
+    importantFile << other.ISBN << std::endl;
+    importantFile << "______________________________" << std::endl;
+    importantFile.close();
     return out;
 }
