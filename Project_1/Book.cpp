@@ -87,6 +87,9 @@ void Book::setISBN(long long int ISBN) {
 long long int Book::getISBN() {
     return this->ISBN;
 }
+void Book::print() {
+    std::cout << "Title: " << this->title;
+}
 std::istream& operator >> (std::istream& in, Book& other) {
     return in;
 }

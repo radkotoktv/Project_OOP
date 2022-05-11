@@ -29,6 +29,8 @@ public:
 	int getRating();
 	void setISBN(long long int ISBN);
 	long long int getISBN();
+	
+	void print();
 
 	friend std::istream& operator >> (std::istream& in, Book& other);
 	friend std::ostream& operator << (std::ostream& out, const Book& other);
