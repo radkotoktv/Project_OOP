@@ -40,7 +40,7 @@ Book::Book(const Book& other) {
     this->rating = other.rating;
     this->ISBN = other.ISBN;
 }
-Book::Book(const char* author, const char* title, const char* text, const char* description, const int rating, long long int ISBN) {
+Book::Book(const char* author, const char* title, const char* text, const char* description, int rating, long long int ISBN) {
     copyString(this->author, author);
     copyString(this->title, title);
     copyString(this->text, text);
@@ -75,7 +75,7 @@ void Book::setDescription(const char* description) {
 const char* Book::getDescription() {
     return this->description;
 }
-void Book::setRating(const int rating) {
+void Book::setRating(int rating) {
     this->rating = rating;
 }
 int Book::getRating() {
@@ -87,7 +87,7 @@ void Book::setISBN(long long int ISBN) {
 long long int Book::getISBN() {
     return this->ISBN;
 }
-std::istream& operator >> (std::istream& in, const Book& other) {
+std::istream& operator >> (std::istream& in, Book& other) {
     return in;
 }
 std::ostream& operator << (std::ostream& out, const Book& other) {
