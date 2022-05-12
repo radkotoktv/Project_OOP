@@ -19,5 +19,5 @@ int main() {
 	biblioteka.addBook(kniga2);
 	biblioteka.addBook(kniga3);
 	biblioteka.addBook(kniga4);
-	biblioteka.print();
+	biblioteka.printLibraryInfo();
 }

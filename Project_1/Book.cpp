@@ -88,7 +88,13 @@ long long int Book::getISBN() {
     return this->ISBN;
 }
 void Book::print() {
-    std::cout << "Title: " << this->title;
+    std::cout << "Author: " << this->author << std::endl;
+    std::cout << "Title: " << this->title << std::endl;
+    std::cout << "Text file: " << this->text << std::endl;
+    std::cout << "Description: " << this->description << std::endl;
+    std::cout << "Rating: " << this->rating << "/10" << std::endl;
+    std::cout << "ISBN: " << this->ISBN << std::endl;
+    std::cout << "________________________" << std::endl;
 }
 std::istream& operator >> (std::istream& in, Book& other) {
     return in;
