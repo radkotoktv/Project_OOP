@@ -17,14 +17,12 @@ void Library::deallocate() {
 }
 void Library::resize() {
     Book* newBooks = new (std::nothrow) Book[this->capacity * INCREASE_STEP];
-    if (!newBooks)
-    {
+    if (!newBooks) {
         std::cout << "Memory problem!" << std::endl;
         return;
     }
 
-    for (std::size_t i = 0; i < this->size; ++i)
-    {
+    for (std::size_t i = 0; i < this->size; ++i) {
         newBooks[i] = this->books[i];
     }
 
@@ -73,9 +71,17 @@ void Library::addBook(const Book& bookToAdd) {
     }
 }
 void Library::printLibraryInfo() {
-    for (std::size_t i = 0; i < this->size; ++i)
-    {
-        std::cout << "SONG #" << i + 1 << std::endl;
+    std::ofstream database("database.txt");
+    for (std::size_t i = 0; i < this->size; ++i) {
+        std::cout << "BOOK #" << i + 1 << std::endl;
         this->books[i].print();
+        database << books[i].getAuthor() << std::endl;
+        database << books[i].getTitle() << std::endl;
+        database << books[i].getText() << std::endl;
+        database << books[i].getDescription() << std::endl;
+        database << books[i].getRating() << std::endl;
+        database << books[i].getISBN() << std::endl;
+        database << "______________________________" << std::endl;
     }
+    database.close();
 }

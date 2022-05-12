@@ -57,3 +57,18 @@ Menu::Menu() {
 Menu::Menu(const int choice) {
 	this->choice = choice;
 }
+void sortedList() {
+
+}
+void findBook() {
+
+}
+void addBookToLibrary() {
+
+}
+void removeBookFromLibrary() {
+
+}
+void printBook() {
+
+}

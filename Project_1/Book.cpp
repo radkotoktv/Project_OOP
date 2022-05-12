@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <fstream>
 #include <cassert>
 #include "Book.h"
 void Book::copyString(char*& destination, const char* source) {
@@ -110,7 +111,7 @@ void Book::print() const {
     std::cout << "Rating: " << this->rating << "/10" << std::endl;
     std::cout << "ISBN: " << this->ISBN << std::endl;
     std::cout << "________________________" << std::endl;
-}
+}    
 Book::~Book() {
     this->deallocate();
 }
