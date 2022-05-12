@@ -16,11 +16,11 @@ Menu::Menu() {
 			std::cout << "_____________________________" << std::endl;
 			std::cout << "Enter 1-6: "; std::cin >> this->choice;
 			switch (choice) {
-			case 1: break;
-			case 2: break;
-			case 3: break;
-			case 4: break;
-			case 5: break;
+			case 1: sortList(); break;
+			case 2: findBook(); break;
+			case 3: addBookToLibrary(); break;
+			case 4: removeBookFromLibrary(); break;
+			case 5: printBook(); break;
 			case 6:
 				std::cout << "Logging out...";
 				return;
@@ -40,10 +40,10 @@ Menu::Menu() {
 			std::cout << "_____________________________" << std::endl;
 			std::cout << "Enter 1-4: "; std::cin >> this->choice;
 			switch (choice) {
-			case 1: break;
-			case 2: break;
-			case 3: break;
-			case 4: 				
+			case 1: sortList(); break;
+			case 2: findBook(); break;
+			case 3: printBook(); break;
+			case 4:
 				std::cout << "Logging out...";
 				return;
 				break;
@@ -52,23 +52,22 @@ Menu::Menu() {
 			}
 		}
 	}
-
 }
 Menu::Menu(const int choice) {
 	this->choice = choice;
 }
-void sortedList() {
-
+void Menu::sortList() {
+	std::cout << "sortList" << std::endl;
 }
-void findBook() {
-
+void Menu::findBook() {
+	std::cout << "findBook" << std::endl;
 }
-void addBookToLibrary() {
-
+void Menu::addBookToLibrary() {
+	std::cout << "addBookToLibrary" << std::endl;
 }
-void removeBookFromLibrary() {
-
+void Menu::removeBookFromLibrary() {
+	std::cout << "removeBookFromLibrary" << std::endl;
 }
-void printBook() {
-
+void Menu::printBook() {
+	std::cout << "printBook" << std::endl;
 }

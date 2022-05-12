@@ -6,7 +6,7 @@ private:
 public:
 	Menu();
 	Menu(const int choice);
-	void sortedList();
+	void sortList();
 	void findBook();
 	void addBookToLibrary();
 	void removeBookFromLibrary();
