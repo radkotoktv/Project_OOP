@@ -10,7 +10,7 @@ int main() {
 	Book kniga3("Aleko Konstantinov", "Bai Ganio", "Texta_na_Bai_Ganio.txt", "Bulgarsko", 9, 666);
 	Book kniga4("Kireto99", "Kak da oceleesh v Lulin", "Texta_na_Kireto.txt", "Lulindjiisko", 1, 2);
 	//Book _kniga;
-	//Admin user;
+	//Admin user1;
 	//user.isAdmin();
 	//std::cout << kniga;
 	//Menu menu;

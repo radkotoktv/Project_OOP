@@ -1,12 +1,11 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <cassert>
-#include <cstring>
-#include <fstream>
 #include "Book.h"
 void Book::copyString(char*& destination, const char* source) {
-    destination = new char[strlen(source) + 1];
-    if (!destination) {
+    destination = new (std::nothrow) char[strlen(source) + 1];
+    if (!destination)
+    {
         std::cout << "Memory problem!" << std::endl;
         return;
     }
@@ -18,76 +17,92 @@ void Book::deallocate() {
     delete[] this->text;
     delete[] this->description;
 }
-Book::Book() {
-    this->author = nullptr;
-    this->title = nullptr;
-    this->text = nullptr;
-    this->description = nullptr;
-    this->rating = 0;
-    this->ISBN = 0;
-}
-Book::Book(const Book& other) {
+void Book::copy(const Book& other) {
     assert(other.author != nullptr);
     assert(other.title != nullptr);
     assert(other.text != nullptr);
     assert(other.description != nullptr);
-    assert(other.rating != 0);
-    assert(other.ISBN != 0);
-    this->author = other.author;
-    this->title = other.title;
-    this->text = other.text;
-    this->description = other.description;
+    this->copyString(this->author, other.author);
+    this->copyString(this->title, other.title);
+    this->copyString(this->text, other.text);
+    this->copyString(this->description, other.description);
     this->rating = other.rating;
     this->ISBN = other.ISBN;
 }
-Book::Book(const char* author, const char* title, const char* text, const char* description, int rating, long long int ISBN) {
-    copyString(this->author, author);
-    copyString(this->title, title);
-    copyString(this->text, text);
-    copyString(this->description, description);
-    this->rating = rating;
-    this->ISBN = ISBN;
+Book::Book() {
+    this->author = nullptr;
+    this->title = nullptr;;
+    this->text = nullptr;;
+    this->description = nullptr;;
+    this->rating = 0;
+    this->ISBN = 0;
 }
-Book::~Book() {
-    this->deallocate();
+Book::Book(const char* author, const char* title, const char* text, const char* description, const int rating, const int ISBN) {
+    this->setAuthor(author);
+    this->setTitle(title);
+    this->setText(text);
+    this->setDescription(description);
+    this->setRating(rating);
+    this->setISBN(ISBN);
 }
+Book::Book(const Book& other) {
+    this->copy(other);
+}
+
+Book& Book::operator = (const Book& other) {
+    if (this != &other) {
+        this->deallocate();
+        this->copy(other);
+    }
+    return *this;
+}
+
 void Book::setAuthor(const char* author) {
-    copyString(this->author, author);
-}
-const char* Book::getAuthor() {
-    return this->author;
+    assert(author != nullptr);
+    delete[] this->author;
+    this->copyString(this->author, author);
 }
 void Book::setTitle(const char* title) {
-    copyString(this->title, title);
-}
-const char* Book::getTitle() {
-    return this->title;
+    assert(title != nullptr);
+    delete[] this->title;
+    this->copyString(this->title, title);
 }
 void Book::setText(const char* text) {
-    copyString(this->text, text);
-}
-const char* Book::getText() {
-    return this->text;
+    assert(text != nullptr);
+    delete[] this->text;
+    this->copyString(this->text, text);
 }
 void Book::setDescription(const char* description) {
-    copyString(this->description, description);
+    assert(description != nullptr);
+    delete[] this->description;
+    this->copyString(this->description, description);
 }
-const char* Book::getDescription() {
-    return this->description;
-}
-void Book::setRating(int rating) {
+void Book::setRating(const int rating) {
     this->rating = rating;
 }
-int Book::getRating() {
-    return this->rating;
-}
-void Book::setISBN(long long int ISBN) {
+void Book::setISBN(const int ISBN) {
     this->ISBN = ISBN;
 }
-long long int Book::getISBN() {
+const char* Book::getAuthor() const {
+    return this->author;
+}
+const char* Book::getTitle() const {
+    return this->title;
+}
+const char* Book::getText() const {
+    return this->text;
+}
+const char* Book::getDescription() const {
+    return this->description;
+}
+const int Book::getRating() const {
+    return this->rating;
+}
+const int Book::getISBN() const {
     return this->ISBN;
 }
-void Book::print() {
+
+void Book::print() const {
     std::cout << "Author: " << this->author << std::endl;
     std::cout << "Title: " << this->title << std::endl;
     std::cout << "Text file: " << this->text << std::endl;
@@ -96,18 +111,6 @@ void Book::print() {
     std::cout << "ISBN: " << this->ISBN << std::endl;
     std::cout << "________________________" << std::endl;
 }
-std::istream& operator >> (std::istream& in, Book& other) {
-    return in;
-}
-std::ostream& operator << (std::ostream& out, const Book& other) {
-    std::ofstream importantFile("importantInfo.txt", std::ios::app);
-    importantFile << other.author << std::endl;
-    importantFile << other.title << std::endl;
-    importantFile << other.text << std::endl;
-    importantFile << other.description << std::endl;
-    importantFile << other.rating << std::endl;
-    importantFile << other.ISBN << std::endl;
-    importantFile << "______________________________" << std::endl;
-    importantFile.close();
-    return out;
+Book::~Book() {
+    this->deallocate();
 }

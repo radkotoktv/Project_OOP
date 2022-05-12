@@ -1,13 +1,13 @@
 #pragma once
 #include "Book.h"
-class Library
-{
+#include <iostream>
+class Library {
 private:
     Book* books;
     std::size_t size;
     std::size_t capacity;
-    std::size_t start;
-    std::size_t multiple;
+    std::size_t INCREASE_STEP;
+    std::size_t INITIAL_CAPACITY;
 
     void copy(const Library& other);
     void deallocate();
@@ -17,7 +17,8 @@ private:
 public:
     Library();
     Library(const Library& other);
+    Library& operator = (const Library& other);
     ~Library();
-    void addBook(Book& bookToAdd);
+    void addBook(const Book& bookToAdd);
     void printLibraryInfo();
 };

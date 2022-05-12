@@ -36,10 +36,10 @@ bool Admin::isAdmin() {
 		std::cin >> buffer;
 		this->attempt = new char[strlen(buffer) + 1];
 		strcpy(this->attempt, buffer);
-		if (strcmp(this->attempt, "USER") == 0) std::cout << "Granting user privileges.";
+		if (strcmp(this->attempt, "USER") == 0) std::cout << "Granting user privileges." << std::endl;
 		else if (strcmp(this->attempt, this->adminPassword) != 0) std::cout << "Incorrect password! ";
 		else {
-			std::cout << "Congratulations! Granting administrator access!";
+			std::cout << "Congratulations! Granting administrator access!" << std::endl;
 			return true;
 		}
 	}
