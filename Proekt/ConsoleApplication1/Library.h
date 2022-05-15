@@ -19,11 +19,15 @@ public:
     Library(const Library& other);
 
     Library& operator = (const Library& other);
-    
+
     void addBook(const Book& bookToAdd);
+    void saveBook(const Book& bookToAdd);
     void printLibraryInfo();
     void printFileInfo();
     void getBooksFromFile();
+
+    void removeBookFromLibrary(const char* bookTItle);
+    void removeBookFromFile(const char* bookTitle);
 
     ~Library();
 };

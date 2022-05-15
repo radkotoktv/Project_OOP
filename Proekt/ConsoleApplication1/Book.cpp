@@ -17,6 +17,8 @@ void Book::deallocate() {
     delete[] this->title;
     delete[] this->text;
     delete[] this->description;
+    delete[] this->rating;
+    delete[] this->ISBN;
 }
 void Book::copy(const Book& other) {
     assert(other.author != nullptr);
@@ -27,18 +29,18 @@ void Book::copy(const Book& other) {
     this->copyString(this->title, other.title);
     this->copyString(this->text, other.text);
     this->copyString(this->description, other.description);
-    this->rating = other.rating;
-    this->ISBN = other.ISBN;
+    this->copyString(this->rating, other.rating);
+    this->copyString(this->ISBN, other.ISBN);
 }
 Book::Book() {
     this->author = nullptr;
     this->title = nullptr;;
     this->text = nullptr;;
     this->description = nullptr;;
-    this->rating = 0;
-    this->ISBN = 0;
+    this->rating = nullptr;
+    this->ISBN = nullptr;
 }
-Book::Book(const char* author, const char* title, const char* text, const char* description, const int rating, const int ISBN) {
+Book::Book(const char* author, const char* title, const char* text, const char* description, const char* rating, const char* ISBN) {
     this->setAuthor(author);
     this->setTitle(title);
     this->setText(text);
@@ -78,11 +80,15 @@ void Book::setDescription(const char* description) {
     delete[] this->description;
     this->copyString(this->description, description);
 }
-void Book::setRating(const int rating) {
-    this->rating = rating;
+void Book::setRating(const char* rating) {
+    assert(rating != nullptr);
+    delete[] this->rating;
+    this->copyString(this->rating, rating);
 }
-void Book::setISBN(const int ISBN) {
-    this->ISBN = ISBN;
+void Book::setISBN(const char* ISBN) {
+    assert(ISBN != nullptr);
+    delete[] this->ISBN;
+    this->copyString(this->ISBN, ISBN);
 }
 const char* Book::getAuthor() const {
     return this->author;
@@ -96,10 +102,10 @@ const char* Book::getText() const {
 const char* Book::getDescription() const {
     return this->description;
 }
-const int Book::getRating() const {
+const char* Book::getRating() const {
     return this->rating;
 }
-const int Book::getISBN() const {
+const char* Book::getISBN() const {
     return this->ISBN;
 }
 
@@ -107,7 +113,7 @@ void Book::print() const {
     std::cout << "________________________" << std::endl;
     std::cout << "Author: " << this->author << std::endl;
     std::cout << "Title: " << this->title << std::endl;
-    std::cout << "Text file: " << this->text << std::endl;
+    std::cout << "Text file: " << this->text << ".txt" << std::endl;
     std::cout << "Description: " << this->description << std::endl;
     std::cout << "Rating: " << this->rating << "/10" << std::endl;
     std::cout << "ISBN: " << this->ISBN << std::endl;
@@ -120,27 +126,36 @@ std::istream& operator >> (std::istream& in, Book& other) {
     std::cout << "Enter author: "; in >> authorBuffer;
     other.author = new char[strlen(authorBuffer) + 1];
     strcpy(other.author, authorBuffer);
-    
+
     delete[] other.title;
     char titleBuffer[100];
     std::cout << "Enter title: "; in >> titleBuffer;
     other.title = new char[strlen(titleBuffer) + 1];
     strcpy(other.title, titleBuffer);
-    
+
     delete[] other.text;
     char textBuffer[100];
     std::cout << "Enter text: "; in >> textBuffer;
     other.text = new char[strlen(textBuffer) + 1];
     strcpy(other.text, textBuffer);
-    
+
     delete[] other.description;
     char descriptionBuffer[100];
     std::cout << "Enter description: "; in >> descriptionBuffer;
     other.description = new char[strlen(descriptionBuffer) + 1];
     strcpy(other.description, descriptionBuffer);
-    
-    std::cout << "Enter rating: "; in >> other.rating;
-    std::cout << "Enter ISBN: "; in >> other.ISBN;
+
+    delete[] other.rating;
+    char ratingBuffer[100];
+    std::cout << "Enter rating: "; in >> ratingBuffer;
+    other.rating = new char[strlen(ratingBuffer) + 1];
+    strcpy(other.rating, ratingBuffer);
+
+    delete[] other.ISBN;
+    char ISBNBuffer[100];
+    std::cout << "Enter ISBN: "; in >> ISBNBuffer;
+    other.ISBN = new char[strlen(ISBNBuffer) + 1];
+    strcpy(other.ISBN, ISBNBuffer);
 
     return in;
 }
