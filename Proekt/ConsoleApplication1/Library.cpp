@@ -106,21 +106,23 @@ void Library::printFileInfo() {
     }
     database.close();
 }
-void Library::addFileToLibrary() {
-    std::ifstream database("database.txt", std::ios::app);
-    if (!database.is_open()) {
-        std::cout << "Problem while opening the file" << std::endl;
-        return;
-    }
-    char tempLine[100];
-    int counter;
-    for (std::size_t i = 0; i < this->size; ++i) {
-        counter = 0;
-        while (counter <= 6) {
-            database.getline(tempLine, 100);
-            database >> this->books[i];
-            counter++;
-        }
-    }
-    database.close();
+void Library::getBooksFromFile() {
+   std::ifstream database("database.txt", std::ios::app);
+   if (!database.is_open()) {
+       std::cout << "Problem while opening the file" << std::endl;
+       return;
+   }
+   char tempLine[100];
+   int numberOfRows = 0;;
+   while (!database.eof()) {
+       database.getline(tempLine, 100);
+       numberOfRows++;
+   }
+   for (int i = 0; i < (numberOfRows / 6); ++i) {
+       if (i == this->capacity) {
+           this->resize();
+       }
+       database >> this->books[i];
+   }
+   database.close();
 }

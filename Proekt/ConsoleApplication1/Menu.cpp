@@ -5,7 +5,7 @@
 #include <iostream>
 Menu::Menu() {
 	this->choice = 0;
-	this->library.addFileToLibrary();
+	this->library.getBooksFromFile();
 }
 Menu::Menu(const int choice) {
 	this->choice = choice;

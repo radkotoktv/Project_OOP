@@ -23,7 +23,7 @@ public:
     void addBook(const Book& bookToAdd);
     void printLibraryInfo();
     void printFileInfo();
-    void addFileToLibrary();
+    void getBooksFromFile();
 
     ~Library();
 };
